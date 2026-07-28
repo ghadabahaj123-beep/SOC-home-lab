@@ -31,8 +31,10 @@ Windows Security Event Logs are shipped by Winlogbeat, processed through Logstas
 for ECS (Elastic Common Schema) field normalization, and stored in the
 `winlogbeat-*` index for detection and analysis in Kibana.
 
-**Screenshot:** `screenshots/01-log-ingestion.png` — Winlogbeat events in Kibana
-Discover, with ECS fields (`agent.*`, `event.*`, `host.*`) populated.
+![Winlogbeat events in Kibana Discover](01-log-ingestion.png)
+
+*Winlogbeat events in Kibana Discover, with ECS fields (`agent.*`, `event.*`,
+`host.*`) populated.*
 
 ---
 
@@ -51,9 +53,14 @@ noise.
 | Severity | Medium (Risk score 47) |
 | MITRE ATT&CK | [T1110 Brute Force](https://attack.mitre.org/techniques/T1110/) — Credential Access (TA0006) |
 
-**Screenshots:**
-- `screenshots/02-failed-logon-events.png` — 4625 events filtered, showing `event.outcome: failure` (ECS-normalized)
-- `screenshots/03-detection-rule.png` — the Kibana detection rule with MITRE ATT&CK mapping
+![4625 events filtered showing event.outcome failure](02-failed-logon-events.png)
+
+*4625 events filtered, showing `event.outcome: failure` (ECS-normalized).*
+
+![Kibana detection rule with MITRE ATT&CK mapping](03-detection-rule.png)
+
+*The Kibana threshold detection rule with MITRE ATT&CK mapping (T1110 Brute Force,
+Credential Access).*
 
 ---
 
@@ -73,8 +80,10 @@ strong indicator of compromise.
 This pairs with Detection 1 to tell a complete story: the brute-force rule catches
 the attempt, and this rule catches the breach if the attempt succeeds.
 
-**Screenshot:** `screenshots/04-alerts-firing.png` — Kibana Alerts page showing
-both rules firing, with `source.ip` attribution and risk scores.
+![Kibana Alerts page showing both rules firing](04-alerts-firing.png)
+
+*Kibana Alerts page showing both rules firing, with `source.ip` attribution and
+risk scores.*
 
 ---
 
