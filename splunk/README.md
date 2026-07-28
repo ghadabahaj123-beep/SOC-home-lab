@@ -37,9 +37,10 @@ disabled = 0
 index = main
 ```
 
-**Screenshot:** `screenshots/01-log-ingestion.png` — Windows Security events
-ingesting into Splunk, with fields auto-extracted (EventCode, Account_Name,
-Logon_Type).
+![Windows Security events ingesting into Splunk](01-log-ingestion.png)
+
+*Windows Security events ingesting into Splunk, with fields auto-extracted
+(EventCode, Account_Name, Logon_Type).*
 
 ---
 
@@ -79,8 +80,10 @@ Each alert carries the context an analyst needs to triage without pivoting:
 - `0xC0000064` — account does not exist → **user enumeration**
 - `0xC000006A` — account exists, wrong password → **password guessing**
 
-**Screenshot:** `screenshots/02-raw-4625-events.png` — raw 4625 events showing
-the `Sub_Status` and `Workstation_Name` fields the detection relies on.
+![Raw 4625 events with Sub_Status and Workstation_Name fields](02-raw-4625-events.png)
+
+*Raw 4625 events showing the `Sub_Status` and `Workstation_Name` fields the
+detection relies on.*
 
 ---
 
@@ -93,12 +96,14 @@ The detection was tested against real attacks from the Kali VM:
 | Local | `runas` with wrong passwords | `Logon_Type 2`, source `::1`, `Sub_Status 0xC0000064` |
 | Network (SMB) | `nxc smb` brute-force vs port 445 | `Logon_Type 3`, source `192.168.56.102`, `Sub_Status 0xC000006A` |
 
-The results table below shows both vectors captured and distinguished by logon
-type and failure code — a single detection covering local and network attacks
-with full attribution.
+The results below show both vectors captured and distinguished by logon type and
+failure code — a single detection covering local and network attacks with full
+attribution.
 
-**Screenshot:** `screenshots/03-detection-results.png` — enriched results showing
-the attacker IP (`192.168.56.102`), logon types, and failure codes.
+![Enriched detection results showing attacker IP and logon types](03-detection-results.png)
+
+*Enriched results showing the attacker IP (`192.168.56.102`), logon types, and
+failure codes.*
 
 ---
 
@@ -108,9 +113,13 @@ The search was saved as a **scheduled alert** running every 5 minutes
 (cron `*/5 * * * *`), triggering when results exist, with severity High and the
 "Add to Triggered Alerts" action.
 
-**Screenshots:**
-- `screenshots/04-triggered-alerts.png` — alerts firing on schedule during the attack window
-- `screenshots/05-alert-config.png` — saved alert configuration (enabled, scheduled)
+![Triggered alerts firing on schedule](04-triggered-alerts.png)
+
+*Alerts firing on schedule during the attack window.*
+
+![Saved alert configuration](05-alert-config.png)
+
+*Saved alert configuration — enabled, scheduled, High severity.*
 
 ---
 
