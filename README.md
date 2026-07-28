@@ -76,6 +76,11 @@ The lab's primary detection identifies brute-force authentication attempts by
 counting failed logon events (Windows Event ID **4625**) per account within a
 time window.
 
+**MITRE ATT&CK:** [T1110 — Brute Force](https://attack.mitre.org/techniques/T1110/)
+(Tactic: Credential Access, TA0006). The ELK build adds a second, behavioral
+detection for a **successful** RDP logon as Administrator — flagging a likely
+compromise when a brute-force attempt succeeds.
+
 ### SPL (Splunk)
 
 ```spl
